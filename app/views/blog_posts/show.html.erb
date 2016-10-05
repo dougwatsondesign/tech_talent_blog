@@ -8,15 +8,17 @@
 	<div class="container">
 		
 	<div class="panel-body">
-		<p><%= @blog_post.user.email %></p>
+		<p><%= link_to @blog_post.user.username, user_posts_path(id: @blog_post.user.id) %></p>
 		<p><%= @blog_post.blog_entry %></p>
 	</div>
 	</div>
 
+<% if current_user.id == @blog_post.user.id %>
 	<div class="panel-footer">
 		<%= link_to 'Edit', edit_blog_post_path(@blog_post), class: "btn btn-warning" %>
 		<%= link_to 'Destroy', @blog_post, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn-btn-danger" %>
 	</div>
+	<% end %>
 </div>
 
 <div class="panel panel-success">
@@ -34,12 +36,16 @@
 	</div>
 	
 	<% @blog_post.comments.each do |comment| %>
-		<div class="panel-body">
-			<p><strong><%= comment.user.email %></strong> said at <%= comment.created_at.to_formatted_s(:long_ordinal)%>: </p>
-			<p><%= comment.comment_entry %></p>
-			<%= link_to "Edit Comment", edit_blog_post_comment_path(@blog_post, comment) %> |
-			<%= link_to "Destroy", [comment.blog_post, comment], method: :delete, data: {confirm: 'Are you sure?'} %>
-		</div>
+		
+			<div class="panel-body">
+				<p><strong><%= link_to comment.user.username, user_posts_path(id: comment.user.id) %></strong> said at <%= comment.created_at.to_formatted_s(:long_ordinal)%>: </p>
+				<p><%= comment.comment_entry %></p>
+				<% if current_user.id == comment.user.id %>
+				<%= link_to "Edit Comment", edit_blog_post_comment_path(@blog_post, comment) %> |
+				<%= link_to "Destroy", [comment.blog_post, comment], method: :delete, data: {confirm: 'Are you sure?'} %>
+				<% end %>
+			</div>
+		
 	<% end %>
 </div>
 

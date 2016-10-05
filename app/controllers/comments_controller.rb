@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
 				format.html {redirect_to blog_post_path}
 			end
 		end
+	end
 
 	def edit
 		@blog_post= BlogPost.find(params[:blog_post_id])
