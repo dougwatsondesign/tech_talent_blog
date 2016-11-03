@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<div class ="container">
+
 <div class="panel-primary">
 	<div class="panel-heading">
 	<%= @blog_post.title %>
@@ -47,6 +49,8 @@
 			</div>
 		
 	<% end %>
+</div>
+
 </div>
 
 <%= link_to 'Back', blog_posts_path, class: "btn btn-primary" %>

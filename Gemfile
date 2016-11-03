@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'rails_db'
 gem 'devise'
 gem 'better_errors'
+gem 'binding_of_caller'
 
 
 

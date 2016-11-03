@@ -7,7 +7,13 @@ class BlogPostsController < ApplicationController
   # GET /blog_posts.json
   def index
     @blog_posts = BlogPost.all
+    if params[:search]
+      @blog_posts = BlogPost.search(params[:search]).order("created_at DESC")
+    else
+      @blog_posts = BlogPost.all.order('created_at DESC')
+    end
   end
+ 
 
   # GET /blog_posts/1
   # GET /blog_posts/1.json
